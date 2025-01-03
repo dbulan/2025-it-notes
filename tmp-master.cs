@@ -1,20 +1,54 @@
 # TMP MASTER
 
-# Git
-$ git init
-$ git add .
+-----------------------------------------------------------------------------------
 
-$ git config --global user.email "you@example.com"
-$ git config --global user.name "Your Name"
+# Laravel 11 Breeze Blade #
+$ composer create-project laravel/laravel example-app // command automatically create new SQLite @ database/database.sqlite to store app data.
 
-$ git commit -m "init"
+$ php artisan serve // for test
+// or more powerfull
+$ composer run dev // run: artisan-server + npm run dev
 
-$ git branch -M master
-$ git remote add origin https://github.com/dbulan/2025-it-notes.git
+$ composer require laravel/breeze --dev
+$ php artisan breeze:install blade // blade without vue and etc.
+$ composer run dev
 
-$ git push -u origin master
-// remote: Invalid username or password.
-// fatal: Authentication failed for 'https://github.com/dbulan/2025-it-notes.git/'
-Settings > Developer Settings > Personal Access Tokens > Tokens (classic).
+// http://127.0.0.1:8000
 
-$ git push -u origin master // appear modal window with credentials
+#
+
+web.php - middleware 
+> auth		// logged-in users.
+> verified  // (!) if enabled email verification.
+
+#
+
+$ php artisan make:model -mrc Chirp // model | migration | controller
+
+$ Route::resource('chirps', ChirpController::class)->only(['index', 'store'])->middleware(['auth', 'verified']);
+
+#
+
+$ php artisan db:show
+$ php artisan db:table users
+$ php artisan migrate
+$ php artisan migrate:fresh
+
+#
+
+$ php artisan tinker // query console
+$ App\Models\Chirp::all();
+
+# Laravel 11 Breeze Blade #
+
+
+# Migrations #
+$table->foreignId('user_id')->constrained()->cascadeOnDelete();
+// Equivalent to:
+$table->unsignedBigInteger('user_id');
+$table->foreign('user_id')->references('id')->on('users');
+# Migrations #
+
+358501234567
+qqqqqq
+Olaf
